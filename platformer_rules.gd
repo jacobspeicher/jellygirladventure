@@ -43,7 +43,7 @@ func _physics_process(delta):
 				timer.wait_time = 1
 				timer.start()
 				
-				var new_player_pos = Vector2(child.get_global_position().x, child.get_global_position().y)
+				var new_player_pos = Vector2(child.get_global_position().x + 50, child.get_global_position().y)
 				print(new_player_pos)
 				new_player_instance.set_name(new_player_name)
 				new_player_instance.set_global_position(new_player_pos)
