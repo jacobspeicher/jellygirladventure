@@ -1,0 +1,5 @@
+The number indicates which body weight percent they are, and the larger they are, the slower the animation is for the ones aside from 100%
+
+JG100_2-7 are the walk cycle, 1 is the regular stance
+
+ensure that they're imported unfiltered!
