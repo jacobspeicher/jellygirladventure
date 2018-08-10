@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 export (int) var run_speed = 225
 export (int) var jump_speed = -415
-export (int) var bounce_back_force = 20
+export (int) var bounce_back_force = 5
 export (int) var gravity = 1200
 export (float) var size = 1.0
 export (bool) var able_to_merge = false
@@ -21,7 +21,8 @@ var on_wall = false
 var initial_char_pos
 
 var hit_object
-var timer
+var time = 0
+var elapsed_time = 0
 var start_knockback = false
 var direction = 'none'
 
@@ -34,10 +35,14 @@ func _ready():
 	set_physics_process(true)
 		
 func _physics_process(delta):
-	if not get_is_knockback():
-		get_input()
-
 	velocity = move_and_slide(velocity, Vector2(0, -1))
+
+	if get_is_knockback():
+		print(elapsed_time, ', ', time)
+		elapsed_time += delta
+
+	if elapsed_time >= time:
+		get_input()
 
 	if is_on_wall() and not is_on_floor():
 		wall_stuck = true
@@ -89,9 +94,23 @@ func _physics_process(delta):
 				pass
 
 			if hit_layer == 32:
-				print('done been hit')
-				set_is_hit(true)
-				velocity = velocity.bounce(col.get_normal()) * bounce_back_force
+				print('knockback')
+				time = 2
+				set_is_knockback(true)
+				if elapsed_time > time:
+					set_is_knockback(false)
+					set_is_hit(true)
+					print('done been hit')
+					time = 0
+					elapsed_time = 0
+				print(velocity)
+				
+				if get_is_knockback():
+					print(col.get_normal(), ', ', col.get_normal().tangent())
+					print((col.get_normal() + col.get_normal().tangent()) / 2)
+					velocity = velocity.bounce((col.get_normal() + col.get_normal().tangent()) / 2)
+
+				print(velocity)
 				print(get_collision_mask_bit(6))
 				set_collision_mask_bit(6, false)
 

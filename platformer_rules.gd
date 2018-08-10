@@ -88,7 +88,7 @@ func merge(character):
 		var new_child = load(character_types[new_scale])
 		var new_child_instance = new_child.instance()
 		var new_child_name = character.get_name()
-		var new_child_pos = character.get_global_position()
+		var new_child_pos = other_player.get_global_position()
 
 		new_child_instance.set_name(new_child_name)
 		new_child_instance.set_global_position(new_child_pos)
