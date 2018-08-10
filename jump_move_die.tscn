@@ -5,7 +5,7 @@
 [node name="Polygon2D3" type="Polygon2D" parent="." index="0"]
 
 editor/display_folded = true
-position = Vector2( 512, 448 )
+position = Vector2( 512, 432 )
 scale = Vector2( 0.347826, 1 )
 polygon = PoolVector2Array( 0, 0, 0, 32, 736, 32, 736, 0, 736, 0, 368, 0, 368, -64, 276, -64, 276, 0 )
 uv = PoolVector2Array(  )
@@ -44,7 +44,7 @@ polygon = PoolVector2Array( -8, -32, -32, -32, -32, 32, 32, 32, 32, -32, 0, -32,
 [node name="Polygon2D4" type="Polygon2D" parent="." index="1"]
 
 editor/display_folded = true
-position = Vector2( 128, 448 )
+position = Vector2( 128, 368 )
 scale = Vector2( 0.347826, 1 )
 polygon = PoolVector2Array( 0, 0, 0, 32, 736, 32, 736, 0, 736, 0 )
 uv = PoolVector2Array(  )
@@ -83,7 +83,7 @@ polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 32, 32, 32, -32 )
 [node name="Polygon2D8" type="Polygon2D" parent="." index="2"]
 
 editor/display_folded = true
-position = Vector2( 384, 480 )
+position = Vector2( 384, 400 )
 scale = Vector2( 0.0869565, 0.5 )
 polygon = PoolVector2Array( 0, 0, 0, 32, 736, 32, 736, 0, 736, 0 )
 uv = PoolVector2Array(  )
@@ -122,9 +122,9 @@ polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 32, 32, 32, -32 )
 [node name="Polygon2D9" type="Polygon2D" parent="." index="3"]
 
 editor/display_folded = true
-position = Vector2( 256, 320 )
+position = Vector2( 320, 256 )
 scale = Vector2( 0.347826, 1 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 736, 32, 736, 0, 736, 0 )
+polygon = PoolVector2Array( 0, 0, 0, 32, 644, 32, 736, 32, 736, 0, 736, 0 )
 uv = PoolVector2Array(  )
 color = Color( 0.219608, 0.478431, 0.00392157, 1 )
 vertex_colors = PoolColorArray(  )
@@ -278,7 +278,6 @@ polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 32, 32, 32, -32 )
 
 [node name="Polygon2D2" type="Polygon2D" parent="." index="7"]
 
-editor/display_folded = true
 position = Vector2( 128, 576 )
 polygon = PoolVector2Array( 0, 0, 0, 32, 800, 32, 800, -64, 736, -64, 736, 0, 576, 0 )
 uv = PoolVector2Array(  )
@@ -316,7 +315,8 @@ polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 37.5652, 32, 37.56
 
 [node name="Polygon2D" type="Polygon2D" parent="." index="8"]
 
-position = Vector2( 352, 304 )
+editor/display_folded = true
+position = Vector2( 416, 240 )
 polygon = PoolVector2Array( 0, 16, 32, 16, 32, 0, 32, -16, 0, -16, 0, 0 )
 uv = PoolVector2Array(  )
 color = Color( 0.996094, 0.11673, 0, 1 )
@@ -351,8 +351,46 @@ _sections_unfolded = [ "Collision" ]
 build_mode = 0
 polygon = PoolVector2Array( -10.6667, -16, -10.6667, 16, 10.6666, 16, 10.6666, -16 )
 
-[node name="Polygon2D5" type="Polygon2D" parent="." index="9"]
+[node name="Polygon2D10" type="Polygon2D" parent="." index="9"]
 
+position = Vector2( 896, 496 )
+polygon = PoolVector2Array( 0, 16, 32, 16, 32, 0, 32, -16, 0, -16, 0, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.219608, 0.478431, 0.00392157, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D10" index="0"]
+
+position = Vector2( 16, 0 )
+scale = Vector2( 1.5, 1 )
+input_pickable = false
+collision_layer = 2
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D10/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10.6667, -16, -10.6667, 16, 10.6666, 16, 10.6666, -16 )
+
+[node name="Polygon2D5" type="Polygon2D" parent="." index="10"]
+
+editor/display_folded = true
 position = Vector2( 128, 560 )
 polygon = PoolVector2Array( 0, 16, 32, 16, 32, 0, 32, -16, 0, -16, 0, 0 )
 uv = PoolVector2Array(  )

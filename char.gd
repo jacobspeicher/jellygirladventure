@@ -22,14 +22,14 @@ var initial_char_pos
 
 var hit_object
 var timer
-var knockback
+var start_knockback = false
 var direction = 'none'
 
 func _ready():
 	velocity = Vector2()
 	jumping = false
 	initial_char_pos = get_global_position()
-	knockback = false
+	start_knockback = false
 	
 	set_physics_process(true)
 		
@@ -57,6 +57,11 @@ func _physics_process(delta):
 			wall_jumping = false
 		if is_on_floor():
 			wall_jumping = false
+
+	if direction == 'left':
+		get_node('Sprite').set_flip_h(true)
+	if direction == 'right':
+		get_node('Sprite').set_flip_h(false)
 	
 	var collision = []
 	for i in range(get_slide_count()):
@@ -123,7 +128,6 @@ func get_input():
 			velocity.x = -run_speed
 		else:
 			direction = 'none'
-	
 
 func get_player_scale():
 	return size
@@ -135,7 +139,7 @@ func get_is_able_to_merge():
 	return able_to_merge
 	
 func get_is_knockback():
-	return knockback
+	return start_knockback
 	
 func get_other_player():
 	if able_to_merge:
@@ -143,7 +147,6 @@ func get_other_player():
 			
 func set_player_scale(new_scale):
 	size = new_scale
-	set_scale(Vector2(new_scale, new_scale))
 	
 func set_is_hit(new_hit):
 	hit = new_hit
@@ -152,9 +155,17 @@ func set_is_able_to_merge(new_able_to_merge):
 	able_to_merge = new_able_to_merge
 	
 func set_is_knockback(new_knockback):
-	knockback = new_knockback
+	start_knockback = new_knockback
 	
 func set_is_dead():
 	remove_child(get_node("CollisionShape2D"))
 	set_physics_process(false)
 	queue_free()
+
+func knockback(normal):
+	set_is_knockback(true)
+	velocity = -velocity
+	while velocity != Vector2(0, 0):
+		print(velocity)
+		move_and_slide(velocity)
+		velocity *= 0.99
