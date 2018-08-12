@@ -8,6 +8,7 @@ export (float) var size = 1.0
 export (bool) var able_to_merge = false
 export (bool) var hit = false
 export (bool) var dead = false
+export (bool) var collided = false
 
 var velocity
 
@@ -24,6 +25,8 @@ var hit_object
 var timer
 var start_knockback = false
 var direction = 'none'
+var last_direction = 'none'
+var anim = 'idle'
 
 func _ready():
 	velocity = Vector2()
@@ -37,7 +40,7 @@ func _physics_process(delta):
 	if not get_is_knockback():
 		get_input()
 
-	velocity = move_and_slide(velocity, Vector2(0, -1))
+	velocity = move_and_slide(velocity, Vector2(0, -1), 5, 10)
 
 	if is_on_wall() and not is_on_floor():
 		wall_stuck = true
@@ -59,19 +62,23 @@ func _physics_process(delta):
 			wall_jumping = false
 
 	if direction == 'left':
-		get_node('Sprite').set_flip_h(true)
+		get_node('AnimatedSprite').set_flip_h(true)
+		anim = 'run'
 	if direction == 'right':
-		get_node('Sprite').set_flip_h(false)
+		get_node('AnimatedSprite').set_flip_h(false)
+		anim = 'run'
+	if direction == 'none':
+		anim = 'idle'
+	
+	get_node('AnimatedSprite').play(anim)
 	
 	var collision = []
 	for i in range(get_slide_count()):
 		collision.append(get_slide_collision(get_slide_count() - 1))
-	if collision:
-		#print(get_slide_count())
+	if collision and not collided:
 		for col in collision:
 			hit_object = col.collider
 			var hit_layer = hit_object.get_collision_layer()
-			#print(hit_layer)
 
 			if hit_layer == 1:
 				set_is_able_to_merge(true)
@@ -89,14 +96,32 @@ func _physics_process(delta):
 				pass
 
 			if hit_layer == 32:
-				print('done been hit')
-				set_is_hit(true)
+				set_is_knockback(true)
+				
 				velocity = velocity.bounce(col.get_normal()) * bounce_back_force
-				print(get_collision_mask_bit(6))
-				set_collision_mask_bit(6, false)
+				print(last_direction)
+				if direction == 'left' or last_direction == 'left':
+					velocity.x = 200
+				if direction == 'right' or last_direction == 'right':
+					velocity.x = -200
+				print(velocity)
+				collided = true
+				
+				set_collision_mask_bit(1, false)
+				set_collision_layer_bit(1, false)
 
 			if hit_layer == 64:
 				pass
+	if collided:
+		get_node('AnimatedSprite').modulate = Color(10, 1, 1, 0.5)
+		velocity.x *= 0.99
+		if (velocity.x < 95 and velocity.x > 0) or (velocity.x > -90 and velocity.x < 0):
+			velocity.x = 0
+		if (velocity.x < 10 and velocity.x > -10):
+			get_node('AnimatedSprite').modulate = Color(1, 1, 1, 1)
+			collided = false
+			set_is_knockback(false)
+			set_is_hit(true)
 	
 func get_input():
 	if velocity.x > 0 or velocity.x < 0:
@@ -122,9 +147,11 @@ func get_input():
 	if not is_on_wall():
 		if right:
 			direction = 'right'
+			last_direction = 'right'
 			velocity.x = run_speed
 		elif left:
 			direction = 'left'
+			last_direction = 'left'
 			velocity.x = -run_speed
 		else:
 			direction = 'none'

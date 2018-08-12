@@ -1,7 +1,22 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://char.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Jelly Girl/JG50_1.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Jelly Girl/JG50_2.png" type="Texture" id=3]
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ) ],
+"loop": true,
+"name": "idle",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "run",
+"speed": 5.0
+} ]
 
 [node name="KinematicBody2D" type="KinematicBody2D"]
 
@@ -22,14 +37,16 @@ size = 1.0
 able_to_merge = false
 hit = false
 dead = false
+collided = false
 
-[node name="Sprite" type="Sprite" parent="." index="0"]
-
-texture = ExtResource( 2 )
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( -12, -20, -28, -20, -28, 24, 32, 24, 32, -20, 16, -20 )
+polygon = PoolVector2Array( -28, -14, -28, 24, 32, 24, 33, -15 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
+
+frames = SubResource( 1 )
+animation = "idle"
 
 

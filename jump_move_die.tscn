@@ -2,248 +2,13 @@
 
 [node name="root" type="Node" index="0"]
 
-[node name="Polygon2D3" type="Polygon2D" parent="." index="0"]
+[node name="wall1" type="Polygon2D" parent="." index="0"]
 
 editor/display_folded = true
-position = Vector2( 512, 432 )
-scale = Vector2( 0.347826, 1 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 736, 32, 736, 0, 736, 0, 368, 0, 368, -64, 276, -64, 276, 0 )
+position = Vector2( 40, 0 )
+polygon = PoolVector2Array( 0, 0, 0, 600, -40, 600, -40, 0 )
 uv = PoolVector2Array(  )
-color = Color( 0.219608, 0.478431, 0.00392157, 1 )
-vertex_colors = PoolColorArray(  )
-offset = Vector2( 0, 0 )
-antialiased = false
-texture = null
-texture_offset = Vector2( 0, 0 )
-texture_scale = Vector2( 1, 1 )
-texture_rotation_degrees = 0.0
-invert_enable = false
-invert_border = 100.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D3" index="0"]
-
-position = Vector2( 368, 16 )
-scale = Vector2( 11.5, 0.5 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 9
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D3/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( -8, -32, -32, -32, -32, 32, 32, 32, 32, -32, 0, -32, 0, -160, -8, -160 )
-
-[node name="Polygon2D4" type="Polygon2D" parent="." index="1"]
-
-editor/display_folded = true
-position = Vector2( 128, 368 )
-scale = Vector2( 0.347826, 1 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 736, 32, 736, 0, 736, 0 )
-uv = PoolVector2Array(  )
-color = Color( 0.219608, 0.478431, 0.00392157, 1 )
-vertex_colors = PoolColorArray(  )
-offset = Vector2( 0, 0 )
-antialiased = false
-texture = null
-texture_offset = Vector2( 0, 0 )
-texture_scale = Vector2( 1, 1 )
-texture_rotation_degrees = 0.0
-invert_enable = false
-invert_border = 100.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D4" index="0"]
-
-position = Vector2( 368, 16 )
-scale = Vector2( 11.5, 0.5 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 9
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D4/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 32, 32, 32, -32 )
-
-[node name="Polygon2D8" type="Polygon2D" parent="." index="2"]
-
-editor/display_folded = true
-position = Vector2( 384, 400 )
-scale = Vector2( 0.0869565, 0.5 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 736, 32, 736, 0, 736, 0 )
-uv = PoolVector2Array(  )
-color = Color( 0.219608, 0.478431, 0.00392157, 1 )
-vertex_colors = PoolColorArray(  )
-offset = Vector2( 0, 0 )
-antialiased = false
-texture = null
-texture_offset = Vector2( 0, 0 )
-texture_scale = Vector2( 1, 1 )
-texture_rotation_degrees = 0.0
-invert_enable = false
-invert_border = 100.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D8" index="0"]
-
-position = Vector2( 368, 16 )
-scale = Vector2( 11.5, 0.5 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 9
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D8/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 32, 32, 32, -32 )
-
-[node name="Polygon2D9" type="Polygon2D" parent="." index="3"]
-
-editor/display_folded = true
-position = Vector2( 320, 256 )
-scale = Vector2( 0.347826, 1 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 644, 32, 736, 32, 736, 0, 736, 0 )
-uv = PoolVector2Array(  )
-color = Color( 0.219608, 0.478431, 0.00392157, 1 )
-vertex_colors = PoolColorArray(  )
-offset = Vector2( 0, 0 )
-antialiased = false
-texture = null
-texture_offset = Vector2( 0, 0 )
-texture_scale = Vector2( 1, 1 )
-texture_rotation_degrees = 0.0
-invert_enable = false
-invert_border = 100.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D9" index="0"]
-
-position = Vector2( 368, 16 )
-scale = Vector2( 11.5, 0.5 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 9
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D9/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 32, 32, 32, -32 )
-
-[node name="Polygon2D6" type="Polygon2D" parent="." index="4"]
-
-editor/display_folded = true
-position = Vector2( -128, 0 )
-scale = Vector2( 0.347826, 1.9 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 0, 320, 736, 320, 736, 32, 736, 0, 736, 0 )
-uv = PoolVector2Array(  )
-color = Color( 0.215686, 0.129412, 0.0196078, 1 )
-vertex_colors = PoolColorArray(  )
-offset = Vector2( 0, 0 )
-antialiased = false
-texture = null
-texture_offset = Vector2( 0, 0 )
-texture_scale = Vector2( 1, 1 )
-texture_rotation_degrees = 0.0
-invert_enable = false
-invert_border = 100.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D6" index="0"]
-
-position = Vector2( 368, 16 )
-scale = Vector2( 11.5, 0.5 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 9
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D6/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, -32, 608, 32, 608, 32, -32 )
-
-[node name="Polygon2D7" type="Polygon2D" parent="." index="5"]
-
-editor/display_folded = true
-position = Vector2( 928, 0 )
-scale = Vector2( 0.347826, 2.375 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 0, 256, 736, 256, 736, 32, 736, 0, 736, 0 )
-uv = PoolVector2Array(  )
-color = Color( 0.21875, 0.133141, 0.0230713, 1 )
-vertex_colors = PoolColorArray(  )
-offset = Vector2( 0, 0 )
-antialiased = false
-texture = null
-texture_offset = Vector2( 0, 0 )
-texture_scale = Vector2( 1, 1 )
-texture_rotation_degrees = 0.0
-invert_enable = false
-invert_border = 100.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D7" index="0"]
-
-position = Vector2( 368, 16 )
-scale = Vector2( 11.5, 0.5 )
-input_pickable = false
-collision_layer = 2
-collision_mask = 9
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D7/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 480, 32, 480, 32, 32, 32, -32 )
-
-[node name="start" type="Polygon2D" parent="." index="6"]
-
-editor/display_folded = true
-position = Vector2( 640, 560 )
-scale = Vector2( 0.0869565, 1 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 736, 32, 736, 0, 736, 0 )
-uv = PoolVector2Array(  )
-color = Color( 0.4, 0.509804, 0.831373, 1 )
+color = Color( 0.226562, 0.190277, 0.190277, 1 )
 vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
 antialiased = false
@@ -258,30 +23,29 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="start" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="wall1" index="0"]
 
-position = Vector2( 368, 16 )
-scale = Vector2( 11.5, 0.5 )
 input_pickable = false
-collision_layer = 64
-collision_mask = 1
+collision_layer = 4
+collision_mask = 9
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 _sections_unfolded = [ "Collision" ]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="start/StaticBody2D" index="0"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall1/StaticBody2D" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 32, 32, 32, -32 )
+polygon = PoolVector2Array( 0, 0, 0, 600, -40, 600, -40, 0 )
 
-[node name="Polygon2D2" type="Polygon2D" parent="." index="7"]
+[node name="wall2" type="Polygon2D" parent="." index="1"]
 
-position = Vector2( 128, 576 )
-polygon = PoolVector2Array( 0, 0, 0, 32, 800, 32, 800, -64, 736, -64, 736, 0, 576, 0 )
+editor/display_folded = true
+position = Vector2( 1020, 0 )
+polygon = PoolVector2Array( 0, 0, 0, 600, -40, 600, -40, 0 )
 uv = PoolVector2Array(  )
-color = Color( 0.220792, 0.480469, 0.00563049, 1 )
+color = Color( 0.226562, 0.190277, 0.190277, 1 )
 vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
 antialiased = false
@@ -291,14 +55,50 @@ texture_scale = Vector2( 1, 1 )
 texture_rotation_degrees = 0.0
 invert_enable = false
 invert_border = 100.0
+_sections_unfolded = [ "Transform" ]
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody2D1" type="StaticBody2D" parent="Polygon2D2" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="wall2" index="0"]
 
-position = Vector2( 368, 16 )
-scale = Vector2( 11.5, 0.5 )
+input_pickable = false
+collision_layer = 4
+collision_mask = 9
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall2/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( 0, 0, 0, 600, -40, 600, -40, 0 )
+
+[node name="floor1" type="Polygon2D" parent="." index="2"]
+
+editor/display_folded = true
+position = Vector2( 40, 560 )
+polygon = PoolVector2Array( 0, 40, 940, 40, 940, 0, 940, 0, 0, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.0901833, 0.367188, 0.0229492, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+_sections_unfolded = [ "Transform" ]
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="floor1" index="0"]
+
 input_pickable = false
 collision_layer = 2
 collision_mask = 9
@@ -308,18 +108,19 @@ friction = 1.0
 bounce = 0.0
 _sections_unfolded = [ "Collision" ]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D2/StaticBody2D1" index="0"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="floor1/StaticBody2D" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( -9.73913, -32, -32, -32, -32, 32, 37.5652, 32, 37.5652, -160, 32, -160, 32, -32, 18.0894, -32 )
+polygon = PoolVector2Array( 0, 0, 940, 0, 940, 20, 940, 40, 0, 40 )
+_sections_unfolded = [ "Transform" ]
 
-[node name="Polygon2D" type="Polygon2D" parent="." index="8"]
+[node name="floor2" type="Polygon2D" parent="." index="3"]
 
 editor/display_folded = true
-position = Vector2( 416, 240 )
-polygon = PoolVector2Array( 0, 16, 32, 16, 32, 0, 32, -16, 0, -16, 0, 0 )
+position = Vector2( 40, 500 )
+polygon = PoolVector2Array( 0, 0, 0, 20, 110, 20, 110, 0 )
 uv = PoolVector2Array(  )
-color = Color( 0.996094, 0.11673, 0, 1 )
+color = Color( 0.0862745, 0.364706, 0.0196078, 1 )
 vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
 antialiased = false
@@ -333,68 +134,29 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="floor2" index="0"]
 
-position = Vector2( 16, 0 )
-scale = Vector2( 1.5, 1 )
-input_pickable = false
-collision_layer = 32
-collision_mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-_sections_unfolded = [ "Collision" ]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D/StaticBody2D" index="0"]
-
-build_mode = 0
-polygon = PoolVector2Array( -10.6667, -16, -10.6667, 16, 10.6666, 16, 10.6666, -16 )
-
-[node name="Polygon2D10" type="Polygon2D" parent="." index="9"]
-
-position = Vector2( 896, 496 )
-polygon = PoolVector2Array( 0, 16, 32, 16, 32, 0, 32, -16, 0, -16, 0, 0 )
-uv = PoolVector2Array(  )
-color = Color( 0.219608, 0.478431, 0.00392157, 1 )
-vertex_colors = PoolColorArray(  )
-offset = Vector2( 0, 0 )
-antialiased = false
-texture = null
-texture_offset = Vector2( 0, 0 )
-texture_scale = Vector2( 1, 1 )
-texture_rotation_degrees = 0.0
-invert_enable = false
-invert_border = 100.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D10" index="0"]
-
-position = Vector2( 16, 0 )
-scale = Vector2( 1.5, 1 )
 input_pickable = false
 collision_layer = 2
-collision_mask = 1
+collision_mask = 9
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 _sections_unfolded = [ "Collision" ]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D10/StaticBody2D" index="0"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="floor2/StaticBody2D" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( -10.6667, -16, -10.6667, 16, 10.6666, 16, 10.6666, -16 )
+polygon = PoolVector2Array( 0, 0, 0, 20, 110, 20, 110, 0 )
 
-[node name="Polygon2D5" type="Polygon2D" parent="." index="10"]
+[node name="start" type="Polygon2D" parent="." index="4"]
 
 editor/display_folded = true
-position = Vector2( 128, 560 )
-polygon = PoolVector2Array( 0, 16, 32, 16, 32, 0, 32, -16, 0, -16, 0, 0 )
+position = Vector2( 500, 530 )
+polygon = PoolVector2Array( 0, 30, 0, 0, 80, 0, 80, 30 )
 uv = PoolVector2Array(  )
-color = Color( 0.996094, 0.11673, 0, 1 )
+color = Color( 0.0700073, 0.578125, 0.578125, 1 )
 vertex_colors = PoolColorArray(  )
 offset = Vector2( 0, 0 )
 antialiased = false
@@ -408,7 +170,43 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D5" index="0"]
+[node name="StaticBody2D" type="StaticBody2D" parent="start" index="0"]
+
+input_pickable = false
+collision_layer = 2
+collision_mask = 9
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="start/StaticBody2D" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( 0, 0, 0, 30, 80, 30, 80, 0 )
+
+[node name="trap1" type="Polygon2D" parent="." index="5"]
+
+editor/display_folded = true
+position = Vector2( 810, 540 )
+polygon = PoolVector2Array( 0, 20, 80, 20, 80, 0, 0, 0 )
+uv = PoolVector2Array(  )
+color = Color( 0.539062, 0.00842285, 0.00842285, 1 )
+vertex_colors = PoolColorArray(  )
+offset = Vector2( 0, 0 )
+antialiased = false
+texture = null
+texture_offset = Vector2( 0, 0 )
+texture_scale = Vector2( 1, 1 )
+texture_rotation_degrees = 0.0
+invert_enable = false
+invert_border = 100.0
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="trap1" index="0"]
 
 input_pickable = false
 collision_layer = 32
@@ -419,9 +217,9 @@ friction = 1.0
 bounce = 0.0
 _sections_unfolded = [ "Collision" ]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D5/StaticBody2D" index="0"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="trap1/StaticBody2D" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( 0, -16, 0, 16, 32, 16, 32, -16 )
+polygon = PoolVector2Array( 0, 0, 0, 20, 80, 20, 80, 0 )
 
 

@@ -75,30 +75,31 @@ func split(character):
 
 func merge(character):
 	var other_player = character.get_other_player()
-	character.set_is_able_to_merge(false)
-	print(other_player)
-	print(weakref(other_player).get_ref())
-	if not weakref(other_player).get_ref() == null:
-		var cur_scale = character.get_player_scale()
-		var other_scale = other_player.get_player_scale()
-		print(cur_scale)
-		print(other_scale)
-		var new_scale = cur_scale + other_scale
-
-		var new_child = load(character_types[new_scale])
-		var new_child_instance = new_child.instance()
-		var new_child_name = character.get_name()
-		var new_child_pos = character.get_global_position()
-
-		new_child_instance.set_name(new_child_name)
-		new_child_instance.set_global_position(new_child_pos)
-		new_child_instance.set_player_scale(new_scale)
-
-		kill(character)
-		kill(other_player)
-
-		player_children.append(new_child_instance)
-		add_child(new_child_instance)
+	if not other_player.collided:
+		character.set_is_able_to_merge(false)
+		print(other_player)
+		print(weakref(other_player).get_ref())
+		if not weakref(other_player).get_ref() == null:
+			var cur_scale = character.get_player_scale()
+			var other_scale = other_player.get_player_scale()
+			print(cur_scale)
+			print(other_scale)
+			var new_scale = cur_scale + other_scale
+	
+			var new_child = load(character_types[new_scale])
+			var new_child_instance = new_child.instance()
+			var new_child_name = character.get_name()
+			var new_child_pos = character.get_global_position()
+	
+			new_child_instance.set_name(new_child_name)
+			new_child_instance.set_global_position(new_child_pos)
+			new_child_instance.set_player_scale(new_scale)
+	
+			kill(character)
+			kill(other_player)
+	
+			player_children.append(new_child_instance)
+			add_child(new_child_instance)
 
 func kill(character):
 	character.set_is_dead()
