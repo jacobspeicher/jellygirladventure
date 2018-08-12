@@ -75,7 +75,7 @@ func split(character):
 
 func merge(character):
 	var other_player = character.get_other_player()
-	if not other_player.collided:
+	if not other_player.collided :
 		character.set_is_able_to_merge(false)
 		print(other_player)
 		print(weakref(other_player).get_ref())
