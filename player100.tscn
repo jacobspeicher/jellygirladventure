@@ -37,7 +37,7 @@ __meta__ = {
 }
 run_speed = 225
 jump_speed = -415
-bounce_back_force = 5
+bounce_back_force = 20
 gravity = 1200
 size = 1.0
 able_to_merge = false

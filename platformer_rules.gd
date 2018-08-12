@@ -31,7 +31,7 @@ func _physics_process(delta):
 	for child in player_children:
 		if child.get_is_hit():
 			if child.get_player_scale() > 0.25:
-				if not child.get_is_knockback():
+				if not child.get_disabled_input():
 					split(child)
 			else:
 				kill(child)
@@ -54,7 +54,7 @@ func split(character):
 	var new_child_instance = new_child.instance()
 	var new_child_name = character.get_name()
 
-	var new_player_pos = Vector2(character.get_global_position().x + 100, character.get_global_position().y)
+	var new_player_pos = Vector2(character.get_global_position().x + -100, character.get_global_position().y)
 	var new_child_pos = character.get_global_position()
 
 	new_player_instance.set_name(new_player_name)
@@ -75,11 +75,11 @@ func split(character):
 
 func merge(character):
 	var other_player = character.get_other_player()
-	if not other_player.collided :
-		character.set_is_able_to_merge(false)
-		print(other_player)
-		print(weakref(other_player).get_ref())
-		if not weakref(other_player).get_ref() == null:
+	print(weakref(other_player).get_ref())
+	if not weakref(other_player).get_ref() == null:
+		print(other_player.name)
+		if not other_player.collided:
+			character.set_is_able_to_merge(false)
 			var cur_scale = character.get_player_scale()
 			var other_scale = other_player.get_player_scale()
 			print(cur_scale)

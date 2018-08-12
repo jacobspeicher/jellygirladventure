@@ -12,54 +12,52 @@ export (bool) var collided = false
 
 var velocity
 
-var jumping
-var wall_jumping
-var wall_stuck = false
+var jumping = false
 
-var on_floor = false
 var on_wall = false
+var on_floor = false
+
+var wall_jumping = false
+var wall_jump_speed = 0
 
 var initial_char_pos
 
 var hit_object
-var timer
-var start_knockback = false
+var wall_jump_timer
+var input = false
+
 var direction = 'none'
 var last_direction = 'none'
+var jump_direction = 'none'
 var anim = 'idle'
 
 func _ready():
 	velocity = Vector2()
-	jumping = false
 	initial_char_pos = get_global_position()
-	start_knockback = false
+	wall_jump_timer = Timer.new()
+	wall_jump_timer.set_timer_process_mode(0)
+	wall_jump_timer.set_wait_time(0.5)
+	wall_jump_timer.set_one_shot(true)
+	add_child(wall_jump_timer)
 	
 	set_physics_process(true)
 		
 func _physics_process(delta):
-	if not get_is_knockback():
+	if not get_disabled_input():
 		get_input()
 
 	velocity = move_and_slide(velocity, Vector2(0, -1), 5, 10)
-
-	if is_on_wall() and not is_on_floor():
-		wall_stuck = true
-		jumping = false
-	else:
-		wall_stuck = false
+	velocity.y += gravity * delta
 	
-	if not wall_stuck:
-		velocity.y += gravity * delta
+	if is_on_floor():
+		on_floor = true
 		
-	if jumping and is_on_floor():
+	if jumping and on_floor:
 		jumping = false
-
-	if wall_jumping:
-		if is_on_wall():
-			wall_stuck = true
-			wall_jumping = false
-		if is_on_floor():
-			wall_jumping = false
+	if wall_jump_timer.is_stopped():
+		wall_jumping = false
+	else:
+		velocity.x = wall_jump_speed
 
 	if direction == 'left':
 		get_node('AnimatedSprite').set_flip_h(true)
@@ -73,9 +71,10 @@ func _physics_process(delta):
 	get_node('AnimatedSprite').play(anim)
 	
 	var collision = []
-	for i in range(get_slide_count()):
-		collision.append(get_slide_collision(get_slide_count() - 1))
-	if collision and not collided:
+	if not collided:
+		for i in range(get_slide_count()):
+			collision.append(get_slide_collision(get_slide_count() - 1))
+	if collision :
 		for col in collision:
 			hit_object = col.collider
 			var hit_layer = hit_object.get_collision_layer()
@@ -85,9 +84,16 @@ func _physics_process(delta):
 
 			if hit_layer == 2:
 				on_floor = true
+				if wall_jump_timer.get_time_left() > 0:
+					wall_jump_timer.stop()
 
 			if hit_layer == 4:
-				on_wall = true
+				if not on_floor:
+					print('time to wall jump')
+					wall_jump_timer.stop()
+					on_wall = true
+				if on_floor:
+					print('on the floor too tho')
 
 			if hit_layer == 8:
 				pass
@@ -96,23 +102,27 @@ func _physics_process(delta):
 				pass
 
 			if hit_layer == 32:
-				set_is_knockback(true)
-				
-				velocity = velocity.bounce(col.get_normal()) * bounce_back_force
-				print(last_direction)
+				disable_input(true)
+				velocity.y = -415
+#				velocity = velocity.bounce(col.get_normal()) * bounce_back_force
+
 				if direction == 'left' or last_direction == 'left':
 					velocity.x = 200
 				if direction == 'right' or last_direction == 'right':
 					velocity.x = -200
 				print(velocity)
 				collided = true
-				
-				set_collision_mask_bit(1, false)
-				set_collision_layer_bit(1, false)
 
 			if hit_layer == 64:
 				pass
+	if on_wall:
+		gravity = 0
+		velocity.y = 0
+		
 	if collided:
+		set_collision_mask_bit(0, false)
+		set_collision_layer_bit(0, false)
+		set_collision_layer_bit(7, true)
 		get_node('AnimatedSprite').modulate = Color(10, 1, 1, 0.5)
 		velocity.x *= 0.99
 		if (velocity.x < 95 and velocity.x > 0) or (velocity.x > -90 and velocity.x < 0):
@@ -120,7 +130,7 @@ func _physics_process(delta):
 		if (velocity.x < 10 and velocity.x > -10):
 			get_node('AnimatedSprite').modulate = Color(1, 1, 1, 1)
 			collided = false
-			set_is_knockback(false)
+			disable_input(false)
 			set_is_hit(true)
 	
 func get_input():
@@ -131,28 +141,43 @@ func get_input():
 	var left = Input.is_action_pressed('left')
 	var jump = Input.is_action_just_pressed('jump')
 
-	if jump and is_on_floor():
+	if jump and on_floor:
+		on_floor = false
 		jumping = true
 		velocity.y = jump_speed
 
-	if jump and wall_stuck and not is_on_floor():
+	if jump and on_wall and not on_floor:
 		wall_jumping = true
-		wall_stuck = false
-		velocity.y = jump_speed
-		if direction == 'left':
-			velocity.x = -jump_speed * 2
-		if direction == 'right':
-			velocity.x = jump_speed * 2
+		on_wall = false
+		if last_direction == 'left':
+			jump_direction = 'right'
+			velocity.y = jump_speed
+			wall_jump_speed = run_speed * 2
+			velocity.x = wall_jump_speed
+			wall_jump_timer.start()
+		if last_direction == 'right':
+			jump_direction = 'left'
+			velocity.y = jump_speed
+			wall_jump_speed = -run_speed * 2
+			velocity.x = wall_jump_speed
+			wall_jump_timer.start()
+		gravity = 1200
 
-	if not is_on_wall():
+	if not on_wall:
 		if right:
 			direction = 'right'
 			last_direction = 'right'
-			velocity.x = run_speed
+			if direction != jump_direction and wall_jumping:
+				pass
+			else:
+				velocity.x = run_speed
 		elif left:
 			direction = 'left'
 			last_direction = 'left'
-			velocity.x = -run_speed
+			if direction != jump_direction and wall_jumping:
+				pass
+			else:
+				velocity.x = -run_speed
 		else:
 			direction = 'none'
 
@@ -165,8 +190,8 @@ func get_is_hit():
 func get_is_able_to_merge():
 	return able_to_merge
 	
-func get_is_knockback():
-	return start_knockback
+func get_disabled_input():
+	return input
 	
 func get_other_player():
 	if able_to_merge:
@@ -181,11 +206,10 @@ func set_is_hit(new_hit):
 func set_is_able_to_merge(new_able_to_merge):
 	able_to_merge = new_able_to_merge
 	
-func set_is_knockback(new_knockback):
-	start_knockback = new_knockback
+func disable_input(new_input):
+	input = new_input
 	
 func set_is_dead():
-	remove_child(get_node("CollisionShape2D"))
 	set_physics_process(false)
 	queue_free()
 
