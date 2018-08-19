@@ -1,25 +1,103 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://char.gd" type="Script" id=1]
-[ext_resource path="res://Sprites/Jelly Girl/JG100_1.png" type="Texture" id=2]
-[ext_resource path="res://Sprites/Jelly Girl/JG100_3.png" type="Texture" id=3]
-[ext_resource path="res://Sprites/Jelly Girl/JG100_2.png" type="Texture" id=4]
-[ext_resource path="res://Sprites/Jelly Girl/JG100_4.png" type="Texture" id=5]
-[ext_resource path="res://Sprites/Jelly Girl/JG100_5.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/Jelly Girl/JG100_6.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/Jelly Girl/JG100_7.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Jelly Girl/JG101.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Jelly Girl/JG102.png" type="Texture" id=3]
+[ext_resource path="res://Sprites/Jelly Girl/JG103.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/Jelly Girl/JG104.png" type="Texture" id=5]
+[ext_resource path="res://Sprites/Jelly Girl/JG105.png" type="Texture" id=6]
+[ext_resource path="res://Sprites/Jelly Girl/JG106.png" type="Texture" id=7]
+[ext_resource path="res://Sprites/Jelly Girl/JG100_1.png" type="Texture" id=8]
+[ext_resource path="res://Sprites/Jelly Girl/JG135.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/Jelly Girl/JG136.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/Jelly Girl/JG137.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/Jelly Girl/JG138.png" type="Texture" id=12]
+[ext_resource path="res://Sprites/Jelly Girl/JG139.png" type="Texture" id=13]
+[ext_resource path="res://Sprites/Jelly Girl/JG140.png" type="Texture" id=14]
+[ext_resource path="res://Sprites/Jelly Girl/JG141.png" type="Texture" id=15]
+[ext_resource path="res://Sprites/Jelly Girl/JG142.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/Jelly Girl/JG143.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/Jelly Girl/JG144.png" type="Texture" id=18]
+[ext_resource path="res://Sprites/Jelly Girl/JG100.png" type="Texture" id=19]
+[ext_resource path="res://Sprites/Jelly Girl/JG107.png" type="Texture" id=20]
+[ext_resource path="res://Sprites/Jelly Girl/JG108.png" type="Texture" id=21]
+[ext_resource path="res://Sprites/Jelly Girl/JG109.png" type="Texture" id=22]
+[ext_resource path="res://Sprites/Jelly Girl/JG110.png" type="Texture" id=23]
+[ext_resource path="res://Sprites/Jelly Girl/JG111.png" type="Texture" id=24]
+[ext_resource path="res://Sprites/Jelly Girl/JG125.png" type="Texture" id=25]
+[ext_resource path="res://Sprites/Jelly Girl/JG126.png" type="Texture" id=26]
+[ext_resource path="res://Sprites/Jelly Girl/JG127.png" type="Texture" id=27]
+[ext_resource path="res://Sprites/Jelly Girl/JG128.png" type="Texture" id=28]
+[ext_resource path="res://Sprites/Jelly Girl/JG129.png" type="Texture" id=29]
+[ext_resource path="res://Sprites/Jelly Girl/JG130.png" type="Texture" id=30]
+[ext_resource path="res://Sprites/Jelly Girl/JG131.png" type="Texture" id=31]
+[ext_resource path="res://Sprites/Jelly Girl/JG132.png" type="Texture" id=32]
+[ext_resource path="res://Sprites/Jelly Girl/JG113.png" type="Texture" id=33]
+[ext_resource path="res://Sprites/Jelly Girl/JG114.png" type="Texture" id=34]
+[ext_resource path="res://Sprites/Jelly Girl/JG115.png" type="Texture" id=35]
+[ext_resource path="res://Sprites/Jelly Girl/JG116.png" type="Texture" id=36]
+[ext_resource path="res://Sprites/Jelly Girl/JG117.png" type="Texture" id=37]
+[ext_resource path="res://Sprites/Jelly Girl/JG118.png" type="Texture" id=38]
+[ext_resource path="res://Sprites/Jelly Girl/JG119.png" type="Texture" id=39]
+[ext_resource path="res://Sprites/Jelly Girl/JG120.png" type="Texture" id=40]
+[ext_resource path="res://Sprites/Jelly Girl/JG121.png" type="Texture" id=41]
+[ext_resource path="res://Sprites/Jelly Girl/JG122.png" type="Texture" id=42]
+[ext_resource path="res://Sprites/Jelly Girl/JG123.png" type="Texture" id=43]
+[ext_resource path="res://Sprites/Jelly Girl/JG124.png" type="Texture" id=44]
+[ext_resource path="res://Sprites/Jelly Girl/JG145.png" type="Texture" id=45]
+[ext_resource path="res://Sprites/Jelly Girl/JG146.png" type="Texture" id=46]
+[ext_resource path="res://Sprites/Jelly Girl/JG147.png" type="Texture" id=47]
+[ext_resource path="res://Sprites/Jelly Girl/JG148.png" type="Texture" id=48]
+[ext_resource path="res://Sprites/Jelly Girl/JG149.png" type="Texture" id=49]
+[ext_resource path="res://Sprites/Jelly Girl/JG150.png" type="Texture" id=50]
+[ext_resource path="res://Sprites/Jelly Girl/JG151.png" type="Texture" id=51]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 2 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": false,
+"name": "split",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 8 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ) ],
+"loop": false,
+"name": "puddle_down",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"loop": true,
+"name": "puddle_run",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
 "loop": true,
 "name": "run",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 15 ) ],
+"loop": true,
+"name": "puddle_idle",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 9 ) ],
+"loop": false,
+"name": "pipe_up",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ) ],
+"loop": false,
+"name": "pipe_down",
+"speed": 12.0
+}, {
+"frames": [ ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ) ],
+"loop": false,
+"name": "puddle_up",
 "speed": 12.0
 } ]
 _sections_unfolded = [ "Resource" ]
@@ -44,6 +122,7 @@ able_to_merge = false
 hit = false
 dead = false
 collided = false
+puddled = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
 
@@ -54,8 +133,23 @@ _sections_unfolded = [ "Transform" ]
 [node name="AnimatedSprite" type="AnimatedSprite" parent="." index="1"]
 
 frames = SubResource( 1 )
-animation = "run"
+animation = "split"
 frame = 5
+playing = true
 _sections_unfolded = [ "Visibility" ]
+
+[node name="wall_jump_timer" type="Timer" parent="." index="2"]
+
+process_mode = 0
+wait_time = 0.4
+one_shot = true
+autostart = false
+
+[node name="puddle_timer" type="Timer" parent="." index="3"]
+
+process_mode = 0
+wait_time = 4.0
+one_shot = true
+autostart = false
 
 

@@ -1,10 +1,9 @@
 [gd_scene format=2]
 
-[node name="root" type="Node" index="0"]
+[node name="root" type="Node"]
 
 [node name="wall1" type="Polygon2D" parent="." index="0"]
 
-editor/display_folded = true
 position = Vector2( 40, 0 )
 polygon = PoolVector2Array( 0, 0, 0, 600, -40, 600, -40, 0 )
 uv = PoolVector2Array(  )

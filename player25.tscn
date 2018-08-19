@@ -38,6 +38,7 @@ able_to_merge = false
 hit = false
 dead = false
 collided = false
+puddled = false
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="0"]
 
@@ -48,5 +49,19 @@ polygon = PoolVector2Array( -24, -8, -24, 20, 24, 20, 25, -8 )
 
 frames = SubResource( 1 )
 animation = "idle"
+
+[node name="wall_jump_timer" type="Timer" parent="." index="2"]
+
+process_mode = 0
+wait_time = 0.4
+one_shot = true
+autostart = false
+
+[node name="puddle_timer" type="Timer" parent="." index="3"]
+
+process_mode = 0
+wait_time = 4.0
+one_shot = true
+autostart = false
 
 

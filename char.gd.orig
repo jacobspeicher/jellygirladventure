@@ -1,0 +1,232 @@
+extends KinematicBody2D
+
+export (int) var run_speed = 225
+export (int) var jump_speed = -415
+export (int) var bounce_back_force = 5
+export (int) var gravity = 1200
+export (float) var size = 1.0
+export (bool) var able_to_merge = false
+export (bool) var hit = false
+export (bool) var dead = false
+export (bool) var collided = false
+
+var velocity
+
+var jumping
+var wall_jumping
+var wall_stuck = false
+
+var on_floor = false
+var on_wall = false
+
+var initial_char_pos
+
+var hit_object
+var time = 0
+var elapsed_time = 0
+var start_knockback = false
+var direction = 'none'
+var last_direction = 'none'
+var anim = 'idle'
+
+func _ready():
+	velocity = Vector2()
+	jumping = false
+	initial_char_pos = get_global_position()
+	start_knockback = false
+	
+	set_physics_process(true)
+		
+func _physics_process(delta):
+<<<<<<< HEAD
+	if not get_is_knockback():
+		get_input()
+
+	velocity = move_and_slide(velocity, Vector2(0, -1), 5, 10)
+=======
+	velocity = move_and_slide(velocity, Vector2(0, -1))
+>>>>>>> c31ddc3f61f6143755d1799fa492e84441a48a21
+
+	if get_is_knockback():
+		print(elapsed_time, ', ', time)
+		elapsed_time += delta
+
+	if elapsed_time >= time:
+		get_input()
+
+	if is_on_wall() and not is_on_floor():
+		wall_stuck = true
+		jumping = false
+	else:
+		wall_stuck = false
+	
+	if not wall_stuck:
+		velocity.y += gravity * delta
+		
+	if jumping and is_on_floor():
+		jumping = false
+
+	if wall_jumping:
+		if is_on_wall():
+			wall_stuck = true
+			wall_jumping = false
+		if is_on_floor():
+			wall_jumping = false
+
+	if direction == 'left':
+		get_node('AnimatedSprite').set_flip_h(true)
+		anim = 'run'
+	if direction == 'right':
+		get_node('AnimatedSprite').set_flip_h(false)
+		anim = 'run'
+	if direction == 'none':
+		anim = 'idle'
+	
+	get_node('AnimatedSprite').play(anim)
+	
+	var collision = []
+	for i in range(get_slide_count()):
+		collision.append(get_slide_collision(get_slide_count() - 1))
+	if collision and not collided:
+		for col in collision:
+			hit_object = col.collider
+			var hit_layer = hit_object.get_collision_layer()
+
+			if hit_layer == 1:
+				set_is_able_to_merge(true)
+
+			if hit_layer == 2:
+				on_floor = true
+
+			if hit_layer == 4:
+				on_wall = true
+
+			if hit_layer == 8:
+				pass
+
+			if hit_layer == 16:
+				pass
+
+			if hit_layer == 32:
+<<<<<<< HEAD
+				set_is_knockback(true)
+				
+				velocity = velocity.bounce(col.get_normal()) * bounce_back_force
+				print(last_direction)
+				if direction == 'left' or last_direction == 'left':
+					velocity.x = 200
+				if direction == 'right' or last_direction == 'right':
+					velocity.x = -200
+				print(velocity)
+				collided = true
+				
+				set_collision_mask_bit(1, false)
+				set_collision_layer_bit(1, false)
+=======
+				print('knockback')
+				time = 2
+				set_is_knockback(true)
+				if elapsed_time > time:
+					set_is_knockback(false)
+					set_is_hit(true)
+					print('done been hit')
+					time = 0
+					elapsed_time = 0
+				print(velocity)
+				
+				if get_is_knockback():
+					print(col.get_normal(), ', ', col.get_normal().tangent())
+					print((col.get_normal() + col.get_normal().tangent()) / 2)
+					velocity = velocity.bounce((col.get_normal() + col.get_normal().tangent()) / 2)
+
+				print(velocity)
+				print(get_collision_mask_bit(6))
+				set_collision_mask_bit(6, false)
+>>>>>>> c31ddc3f61f6143755d1799fa492e84441a48a21
+
+			if hit_layer == 64:
+				pass
+	if collided:
+		get_node('AnimatedSprite').modulate = Color(10, 1, 1, 0.5)
+		velocity.x *= 0.99
+		if (velocity.x < 95 and velocity.x > 0) or (velocity.x > -90 and velocity.x < 0):
+			velocity.x = 0
+		if (velocity.x < 10 and velocity.x > -10):
+			get_node('AnimatedSprite').modulate = Color(1, 1, 1, 1)
+			collided = false
+			set_is_knockback(false)
+			set_is_hit(true)
+	
+func get_input():
+	if velocity.x > 0 or velocity.x < 0:
+		velocity.x *= 0.5
+		
+	var right = Input.is_action_pressed('right')
+	var left = Input.is_action_pressed('left')
+	var jump = Input.is_action_just_pressed('jump')
+
+	if jump and is_on_floor():
+		jumping = true
+		velocity.y = jump_speed
+
+	if jump and wall_stuck and not is_on_floor():
+		wall_jumping = true
+		wall_stuck = false
+		velocity.y = jump_speed
+		if direction == 'left':
+			velocity.x = -jump_speed * 2
+		if direction == 'right':
+			velocity.x = jump_speed * 2
+
+	if not is_on_wall():
+		if right:
+			direction = 'right'
+			last_direction = 'right'
+			velocity.x = run_speed
+		elif left:
+			direction = 'left'
+			last_direction = 'left'
+			velocity.x = -run_speed
+		else:
+			direction = 'none'
+
+func get_player_scale():
+	return size
+	
+func get_is_hit():
+	return hit
+
+func get_is_able_to_merge():
+	return able_to_merge
+	
+func get_is_knockback():
+	return start_knockback
+	
+func get_other_player():
+	if able_to_merge:
+		return hit_object
+			
+func set_player_scale(new_scale):
+	size = new_scale
+	
+func set_is_hit(new_hit):
+	hit = new_hit
+	
+func set_is_able_to_merge(new_able_to_merge):
+	able_to_merge = new_able_to_merge
+	
+func set_is_knockback(new_knockback):
+	start_knockback = new_knockback
+	
+func set_is_dead():
+	remove_child(get_node("CollisionShape2D"))
+	set_physics_process(false)
+	queue_free()
+
+func knockback(normal):
+	set_is_knockback(true)
+	velocity = -velocity
+	while velocity != Vector2(0, 0):
+		print(velocity)
+		move_and_slide(velocity)
+		velocity *= 0.99

@@ -9,6 +9,7 @@ export (bool) var able_to_merge = false
 export (bool) var hit = false
 export (bool) var dead = false
 export (bool) var collided = false
+export (bool) var puddled = false
 
 var velocity
 
@@ -19,6 +20,11 @@ var on_floor = false
 
 var wall_jumping = false
 var wall_jump_speed = 0
+
+var just_puddled = false
+var just_un_puddled = false
+
+var puddle_timer
 
 var initial_char_pos
 
@@ -34,11 +40,9 @@ var anim = 'idle'
 func _ready():
 	velocity = Vector2()
 	initial_char_pos = get_global_position()
-	wall_jump_timer = Timer.new()
-	wall_jump_timer.set_timer_process_mode(0)
-	wall_jump_timer.set_wait_time(0.5)
-	wall_jump_timer.set_one_shot(true)
-	add_child(wall_jump_timer)
+	wall_jump_timer = get_node('wall_jump_timer')
+	puddle_timer = get_node('puddle_timer')
+	get_node('AnimatedSprite').connect('animation_finished', self, 'on_animation_finished')
 	
 	set_physics_process(true)
 		
@@ -51,6 +55,7 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		on_floor = true
+		wall_jump_timer.stop()
 		
 	if jumping and on_floor:
 		jumping = false
@@ -58,15 +63,38 @@ func _physics_process(delta):
 		wall_jumping = false
 	else:
 		velocity.x = wall_jump_speed
+	
+	if puddled and puddle_timer.is_stopped():
+		just_un_puddled = true
+	if on_wall and puddled:
+		on_wall = false
+		
 
-	if direction == 'left':
-		get_node('AnimatedSprite').set_flip_h(true)
-		anim = 'run'
-	if direction == 'right':
-		get_node('AnimatedSprite').set_flip_h(false)
-		anim = 'run'
-	if direction == 'none':
-		anim = 'idle'
+	if not puddled:
+		if direction == 'left':
+			get_node('AnimatedSprite').set_flip_h(true)
+			anim = 'run'
+		if direction == 'right':
+			get_node('AnimatedSprite').set_flip_h(false)
+			anim = 'run'
+		if direction == 'none':
+			anim = 'idle'
+	else:
+		if direction == 'left':
+			get_node('AnimatedSprite').set_flip_h(true)
+			anim = 'puddle_run'
+		if direction == 'right':
+			get_node('AnimatedSprite').set_flip_h(false)
+			anim = 'puddle_run'
+		if direction == 'none':
+			anim = 'puddle_idle'
+			
+	if just_puddled:
+		anim = 'puddle_down'
+		get_node('AnimatedSprite').play(anim)
+	if just_un_puddled:
+		anim = 'puddle_up'
+		get_node('AnimatedSprite').play(anim)
 	
 	get_node('AnimatedSprite').play(anim)
 	
@@ -82,18 +110,14 @@ func _physics_process(delta):
 			if hit_layer == 1:
 				set_is_able_to_merge(true)
 
-			if hit_layer == 2:
-				on_floor = true
-				if wall_jump_timer.get_time_left() > 0:
-					wall_jump_timer.stop()
+#			if hit_layer == 2:
+#				on_floor = true
+				
 
 			if hit_layer == 4:
-				if not on_floor:
-					print('time to wall jump')
+				if not on_floor and not puddled:
 					wall_jump_timer.stop()
 					on_wall = true
-				if on_floor:
-					print('on the floor too tho')
 
 			if hit_layer == 8:
 				pass
@@ -104,8 +128,6 @@ func _physics_process(delta):
 			if hit_layer == 32:
 				disable_input(true)
 				velocity.y = -415
-#				velocity = velocity.bounce(col.get_normal()) * bounce_back_force
-
 				if direction == 'left' or last_direction == 'left':
 					velocity.x = 200
 				if direction == 'right' or last_direction == 'right':
@@ -118,6 +140,8 @@ func _physics_process(delta):
 	if on_wall:
 		gravity = 0
 		velocity.y = 0
+	if not on_wall and not wall_jumping:
+		gravity = 1200
 		
 	if collided:
 		set_collision_mask_bit(0, false)
@@ -140,6 +164,7 @@ func get_input():
 	var right = Input.is_action_pressed('right')
 	var left = Input.is_action_pressed('left')
 	var jump = Input.is_action_just_pressed('jump')
+	var puddle = Input.is_action_just_pressed('puddle')
 
 	if jump and on_floor:
 		on_floor = false
@@ -180,6 +205,33 @@ func get_input():
 				velocity.x = -run_speed
 		else:
 			direction = 'none'
+		
+		if puddle and not just_puddled and puddled and on_floor:
+			just_un_puddled = true
+			
+		if puddle and not just_un_puddled and not puddled and on_floor:
+			just_puddled = true
+			set_collision_mask_bit(3, false)
+			set_collision_mask_bit(5, false)
+			set_collision_layer_bit(0, false)
+			set_collision_layer_bit(8, true)
+			
+		
+
+func on_animation_finished():
+	if just_puddled:
+		just_puddled = false
+		puddled = true
+		puddle_timer.start()
+	if just_un_puddled:
+		set_collision_mask_bit(3, true)
+		set_collision_mask_bit(5, true)
+		set_collision_layer_bit(0, true)
+		set_collision_layer_bit(8, false)
+		puddle_timer.stop()
+		just_un_puddled = false
+		puddled = false
+
 
 func get_player_scale():
 	return size
